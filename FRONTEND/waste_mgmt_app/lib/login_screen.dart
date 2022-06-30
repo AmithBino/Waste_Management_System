@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class StartState extends State<LoginScreen> {
+  bool isHiddenPassword = true;
   @override
   Widget build(BuildContext context) {
     return initWidget();
@@ -27,9 +28,9 @@ class StartState extends State<LoginScreen> {
           height: 300,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90)),
-            color: new Color(0xffF5591F),
+            color: new Color(0xff1FAB89),
             gradient: LinearGradient(
-              colors: [(new Color(0xffF5591F)), new Color(0xffF2861E)],
+              colors: [(new Color(0xff1FAB89)), new Color(0xff62D2A2)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -42,7 +43,7 @@ class StartState extends State<LoginScreen> {
               Container(
                 margin: EdgeInsets.only(top: 50),
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/logoo.png',
                   height: 150,
                   width: 150,
                 ),
@@ -74,11 +75,11 @@ class StartState extends State<LoginScreen> {
             ],
           ),
           child: TextField(
-            cursorColor: Color(0xffF5591F),
+            cursorColor: Color(0xff1FAB89),
             decoration: InputDecoration(
               icon: Icon(
                 Icons.email,
-                color: Color(0xffF5591F),
+                color: Color(0xff1FAB89),
               ),
               hintText: "Enter Email",
               enabledBorder: InputBorder.none,
@@ -102,14 +103,22 @@ class StartState extends State<LoginScreen> {
             ],
           ),
           child: TextField(
-            cursorColor: Color(0xffF5591F),
+            obscureText: isHiddenPassword,
+            cursorColor: Color(0xff1FAB89),
             decoration: InputDecoration(
-              focusColor: Color(0xffF5591F),
+              focusColor: Color(0xff1FAB89),
               icon: Icon(
                 Icons.vpn_key,
-                color: Color(0xffF5591F),
+                color: Color(0xff1FAB89),
               ),
               hintText: "Enter Password",
+              suffixIcon: InkWell(
+                onTap: _togglePasswordView,
+                child: Icon(
+                  isHiddenPassword ? Icons.visibility_off : Icons.visibility,
+                  color: Color(0xff1FAB89),
+                ),
+              ),
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
             ),
@@ -122,7 +131,10 @@ class StartState extends State<LoginScreen> {
             onTap: () {
               // Write Click Listener Code Here
             },
-            child: Text("Forget Password?"),
+            child: (Text(
+              "Forget Password?",
+              style: TextStyle(color: Color(0xff1FAB89)),
+            )),
           ),
         ),
         GestureDetector(
@@ -136,7 +148,7 @@ class StartState extends State<LoginScreen> {
             height: 54,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: [(new Color(0xffF5591F)), new Color(0xffF2861E)],
+                  colors: [(new Color(0xff1FAB89)), new Color(0xff1FAB89)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight),
               borderRadius: BorderRadius.circular(50),
@@ -159,11 +171,11 @@ class StartState extends State<LoginScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Don't Have Any Account?  "),
+              Text("Don't Have An Account?  "),
               GestureDetector(
                 child: Text(
                   "Register Now",
-                  style: TextStyle(color: Color(0xffF5591F)),
+                  style: TextStyle(color: Color(0xff1FAB89)),
                 ),
                 onTap: () {
                   // Write Tap Code Here.
@@ -179,5 +191,11 @@ class StartState extends State<LoginScreen> {
         )
       ],
     )));
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      isHiddenPassword = !isHiddenPassword;
+    });
   }
 }

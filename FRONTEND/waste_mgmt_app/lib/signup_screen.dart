@@ -6,6 +6,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class InitState extends State<SignUpScreen> {
+  bool isHiddenPassword = true;
   @override
   Widget build(BuildContext context) => initWidget();
 
@@ -18,9 +19,9 @@ class InitState extends State<SignUpScreen> {
           height: 250,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90)),
-            color: new Color(0xffF5591F),
+            color: new Color(0xff1FAB89),
             gradient: LinearGradient(
-              colors: [(new Color(0xffF5591F)), new Color(0xffF2861E)],
+              colors: [(new Color(0xff1FAB89)), new Color(0xff62D2A2)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -33,9 +34,9 @@ class InitState extends State<SignUpScreen> {
               Container(
                 margin: EdgeInsets.only(top: 50),
                 child: Image.asset(
-                  'assets/images/logo.png',
-                  height: 120,
-                  width: 120,
+                  'assets/images/logoo.png',
+                  height: 130,
+                  width: 130,
                 ),
               ),
               Container(
@@ -65,11 +66,11 @@ class InitState extends State<SignUpScreen> {
             ],
           ),
           child: TextField(
-            cursorColor: Color(0xffF5591F),
+            cursorColor: Color(0xff1FAB89),
             decoration: InputDecoration(
               icon: Icon(
                 Icons.person,
-                color: Color(0xffF5591F),
+                color: Color(0xff1FAB89),
               ),
               hintText: "Full Name",
               enabledBorder: InputBorder.none,
@@ -93,11 +94,11 @@ class InitState extends State<SignUpScreen> {
             ],
           ),
           child: TextField(
-            cursorColor: Color(0xffF5591F),
+            cursorColor: Color(0xff1FAB89),
             decoration: InputDecoration(
               icon: Icon(
                 Icons.email,
-                color: Color(0xffF5591F),
+                color: Color(0xff1FAB89),
               ),
               hintText: "Email",
               enabledBorder: InputBorder.none,
@@ -121,12 +122,12 @@ class InitState extends State<SignUpScreen> {
             ],
           ),
           child: TextField(
-            cursorColor: Color(0xffF5591F),
+            cursorColor: Color(0xff1FAB89),
             decoration: InputDecoration(
-              focusColor: Color(0xffF5591F),
+              focusColor: Color(0xff1FAB89),
               icon: Icon(
                 Icons.phone,
-                color: Color(0xffF5591F),
+                color: Color(0xff1FAB89),
               ),
               hintText: "Phone Number",
               enabledBorder: InputBorder.none,
@@ -150,14 +151,22 @@ class InitState extends State<SignUpScreen> {
             ],
           ),
           child: TextField(
-            cursorColor: Color(0xffF5591F),
+            obscureText: isHiddenPassword,
+            cursorColor: Color(0xff1FAB89),
             decoration: InputDecoration(
-              focusColor: Color(0xffF5591F),
+              focusColor: Color(0xff1FAB89),
               icon: Icon(
                 Icons.vpn_key,
-                color: Color(0xffF5591F),
+                color: Color(0xff1FAB89),
               ),
               hintText: "Enter Password",
+              suffixIcon: InkWell(
+                onTap: _togglePasswordView,
+                child: Icon(
+                  isHiddenPassword ? Icons.visibility_off : Icons.visibility,
+                  color: Color(0xff1FAB89),
+                ),
+              ),
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
             ),
@@ -174,7 +183,7 @@ class InitState extends State<SignUpScreen> {
             height: 54,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: [(new Color(0xffF5591F)), new Color(0xffF2861E)],
+                  colors: [(new Color(0xff1FAB89)), new Color(0xff62D2A2)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight),
               borderRadius: BorderRadius.circular(50),
@@ -197,11 +206,11 @@ class InitState extends State<SignUpScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Have Already Member?  "),
+              Text("Have An Account?  "),
               GestureDetector(
                 child: Text(
                   "Login Now",
-                  style: TextStyle(color: Color(0xffF5591F)),
+                  style: TextStyle(color: Color(0xff1FAB89)),
                 ),
                 onTap: () {
                   // Write Tap Code Here.
@@ -213,5 +222,11 @@ class InitState extends State<SignUpScreen> {
         )
       ],
     )));
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      isHiddenPassword = !isHiddenPassword;
+    });
   }
 }
