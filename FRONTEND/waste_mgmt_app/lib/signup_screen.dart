@@ -29,11 +29,12 @@ class InitState extends State<SignUpScreen> {
             'password': user.password
           });
       if (response.statusCode == 200) {
+        debugPrint(response.body);
         var data = jsonDecode(response.body.toString());
         print(data['token']);
         print("account created succesfully");
-        Navigator.push(context,
-            new MaterialPageRoute(builder: (context) => LoginScreen()));
+        // Navigator.push(context,
+        //     new MaterialPageRoute(builder: (context) => LoginScreen()));
       } else {
         print('failed');
       }

@@ -264,14 +264,21 @@ class StartState extends State<LoginScreen> {
                             } else {
                               print("not ok");
                             }
-                            if (selectedItem == "User") {
+                            if (selectedItem == "Select one") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()),
+                              );
+                              debugPrint("failed");
+                            } else if (selectedItem == "User") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Users()),
                               );
                               debugPrint("user");
-                            } else{
+                            } else {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
