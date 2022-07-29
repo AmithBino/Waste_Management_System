@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:waste_mgmt_app/map.dart';
-import './user.dart';
-import 'navbarcoll.dart';
+import '../navbarcoll.dart';
+import 'package:pay/pay.dart';
 
-class Collector extends StatefulWidget {
+class Payments extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => InitState();
 }
 
-class InitState extends State<Collector> {
+class InitState extends State<Payments> {
+  static const _paymentItems = [
+    PaymentItem(
+      label: 'Total',
+      amount: '99.99',
+      status: PaymentItemStatus.final_price,
+    )
+  ];
   @override
   Widget build(BuildContext context) => initWidget();
 
   Widget initWidget() {
     return Scaffold(
+        // body: screens[index],
         drawer: NavBar(),
         appBar: AppBar(
           backgroundColor: new Color(0xff1FAB89),
@@ -54,9 +62,9 @@ class InitState extends State<Collector> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 5),
                       child: Image.asset(
-                        'assets/images/coll.png',
+                        'assets/images/pay.png',
                         // height: 300,
                         width: 200,
                       ),
@@ -67,7 +75,48 @@ class InitState extends State<Collector> {
               GestureDetector(
                 child: Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 20, right: 20, top: 50),
+                  margin: EdgeInsets.only(left: 80, right: 80, top: 50),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  height: 100,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      (new Color(0xff1FAB89)),
+                      new Color(0xff1FAB89)
+                    ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey[200],
+                    boxShadow: [
+                      BoxShadow(
+                          offset: Offset(0, 10),
+                          blurRadius: 50,
+                          color: Color(0xffEEEEEE)),
+                    ],
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10),
+                        Text(
+                          "Balance ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          "\u{20B9} 200",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 28),
+                        ),
+                      ]),
+                ),
+              ),
+              GestureDetector(
+                child: Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 100),
                   padding: EdgeInsets.only(left: 20, right: 20),
                   height: 54,
                   decoration: BoxDecoration(
@@ -93,56 +142,46 @@ class InitState extends State<Collector> {
                           ));
                     },
                     child: Text(
-                      "OPEN MAP",
+                      "Add to Wallet",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
               ),
-              GestureDetector(
-                child: Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: 20, right: 20, top: 100),
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  height: 200,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      (new Color(0xff1FAB89)),
-                      new Color(0xff1FAB89)
-                    ], begin: Alignment.centerLeft, end: Alignment.centerRight),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey[200],
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 10),
-                          blurRadius: 50,
-                          color: Color(0xffEEEEEE)),
-                    ],
+              Row(
+                children: [
+                  ApplePayButton(
+                    paymentConfigurationAsset: 'files/applepay.json',
+                    paymentItems: _paymentItems,
+                    width: 200,
+                    height: 50,
+                    style: ApplePayButtonStyle.black,
+                    type: ApplePayButtonType.buy,
+                    margin: const EdgeInsets.only(top: 15.0),
+                    onPaymentResult: (data) {
+                      print(data);
+                    },
+                    loadingIndicator: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 20),
-                        Text(
-                          "Pickups Completed : ",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 30),
-                        Text(
-                          "5",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 70,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ]),
-                ),
-              ),
+                  GooglePayButton(
+                    paymentConfigurationAsset: 'files/gpay.json',
+                    paymentItems: _paymentItems,
+                    width: 200,
+                    height: 50,
+                    style: GooglePayButtonStyle.black,
+                    type: GooglePayButtonType.pay,
+                    margin: const EdgeInsets.only(top: 30.0, left: 100),
+                    onPaymentResult: (data) {
+                      print(data);
+                    },
+                    loadingIndicator: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ));

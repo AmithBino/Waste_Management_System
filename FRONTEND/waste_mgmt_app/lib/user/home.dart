@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:waste_mgmt_app/map.dart';
-import './user.dart';
-import 'navbarcoll.dart';
+import 'package:waste_mgmt_app/user/pickup.dart';
+import '../navbarcoll.dart';
 
-class Collector extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => InitState();
 }
 
-class InitState extends State<Collector> {
+class InitState extends State<Home> {
   @override
   Widget build(BuildContext context) => initWidget();
 
   Widget initWidget() {
     return Scaffold(
+        // body: screens[index],
         drawer: NavBar(),
         appBar: AppBar(
           backgroundColor: new Color(0xff1FAB89),
@@ -56,7 +57,7 @@ class InitState extends State<Collector> {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: Image.asset(
-                        'assets/images/coll.png',
+                        'assets/images/rrr.png',
                         // height: 300,
                         width: 200,
                       ),
@@ -89,11 +90,11 @@ class InitState extends State<Collector> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Maps(),
+                            builder: (context) => Pickup(),
                           ));
                     },
                     child: Text(
-                      "OPEN MAP",
+                      "New Pickup",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -104,7 +105,7 @@ class InitState extends State<Collector> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20, right: 20, top: 100),
                   padding: EdgeInsets.only(left: 20, right: 20),
-                  height: 200,
+                  height: 54,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
                       (new Color(0xff1FAB89)),
@@ -119,28 +120,10 @@ class InitState extends State<Collector> {
                           color: Color(0xffEEEEEE)),
                     ],
                   ),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 20),
-                        Text(
-                          "Pickups Completed : ",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 30),
-                        Text(
-                          "5",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 70,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ]),
+                  child: Text(
+                    "Pickup Status",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ],
